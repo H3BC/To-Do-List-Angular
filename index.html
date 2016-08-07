@@ -1,0 +1,38 @@
+<!DOCtype HTML>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>To do list</title>
+		<style>
+			.done-true{
+				color: grey;
+				text-decoration: line-through;
+			}
+		</style>
+	</head>
+	<body ng-app="app">
+	<div ng-controller="mainController">
+		<center>
+			<h1>To Do List</h1>
+			<input type="text" ng-model="task"><br>
+			<input type="button" ng-click="addTask()" value="Add task">
+		</center>
+		
+			<ol>
+				<li ng-repeat="fullList in taskList">
+				<input type="checkbox" ng-model="fullList.status">
+				<span ng-dblclick="editTask()" class="done-{{fullList.status}}"> 
+				{{fullList.taskContent}} 
+				</span>
+				</li>
+			</ol>
+		
+
+	</div>
+		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.js"></script>
+    <script src="scripts/myScripts.js"></script>
+	</body>
+</html>
