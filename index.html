@@ -8,6 +8,9 @@
 				color: grey;
 				text-decoration: line-through;
 			}
+			span[contentEditable="true"]{
+				background-color: red;
+			}
 		</style>
 	</head>
 	<body ng-app="app">
@@ -16,12 +19,12 @@
 			<h1>To Do List</h1>
 			<input type="text" ng-model="task"><br>
 			<input type="button" ng-click="addTask()" value="Add task">
+			<input type="button" ng-show="taskList.length>0" ng-click="removeTask()" value="delate checked tasks">
 		</center>
-		
 			<ol>
 				<li ng-repeat="fullList in taskList">
 				<input type="checkbox" ng-model="fullList.status">
-				<span ng-dblclick="editTask()" class="done-{{fullList.status}}"> 
+				<span ng-dblclick="editTask()" class="done-{{fullList.status}}" ng-model="fullList.taskContent" ng-keydown="closeEdit(fullList.taskContent)"> 
 				{{fullList.taskContent}} 
 				</span>
 				</li>
