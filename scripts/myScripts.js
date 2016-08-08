@@ -41,13 +41,17 @@ angular.module('app',[])
 	}
 
 	$scope.removeTask = function() {
+		
 	var answer = confirm("Are you sure?");
 	if(answer == true){
-		var lngth = $scope.taskList.length;
-			for (var i = 0; i < lngth; i++){
-				if($scope.taskList[i].status === true){
-					$scope.taskList.splice(i, 1);
+		var lngth = $scope.taskList.length-1;
+			while ( lngth >= 0 ){
+				
+				if($scope.taskList[lngth].status === true){
+					
+					$scope.taskList.splice(lngth, 1);
 					localStorage['taskList'] = JSON.stringify($scope.taskList);
+					lngth--;
 					
 				}
 			}
