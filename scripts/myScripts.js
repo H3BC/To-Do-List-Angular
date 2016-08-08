@@ -1,16 +1,22 @@
 angular.module('app',[])
 
 .controller('mainController', function($scope){
-	$scope.taskList = [];
-	$scope.view = false;
-	console.log($scope.view);
+	$scope.taskList = [];	
 
-	
+	var listData = localStorage['taskList'];
+
+	if (listData !== undefined){
+		$scope.taskList = JSON.parse(listData);
+	}
+
+
 
 	$scope.addTask = function(){
 		if($scope.task != null){
-			$scope.taskList.push({'taskContent': $scope.task, 'status': 'false', 'time' : getCurrentDate() });
+			$scope.taskList.push({'taskContent': $scope.task, 'status': 'false', 'description': '', 'time' : getCurrentDate() });
 			$scope.task = null;
+			localStorage['taskList'] = JSON.stringify($scope.taskList);
+			
 			
 		}
 		else{
@@ -24,6 +30,7 @@ angular.module('app',[])
 	}
 
 	$scope.closeEdit = function(space){
+		
 		if (event.keyCode == 13 && space != " "){
 			$scope.editTask();
 			
@@ -36,8 +43,9 @@ angular.module('app',[])
 	if(answer == true){
 		var lngth = $scope.taskList.length;
 			for (var i = 0; i < lngth; i++){
-				if($scope.taskList[i].status == true){
-					$scope.taskList.splice(i, 1)
+				if($scope.taskList[i].status === true){
+					$scope.taskList.splice(i, 1);
+					localStorage['taskList'] = JSON.stringify($scope.taskList);
 					
 				}
 			}
@@ -100,7 +108,8 @@ angular.module('app',[])
 		}
 
 	
-		return year + "," + day + " " + month + "," + hours + ":" + minutes;
+		return year + ", " + day + " " + month + ", " + hours + ":" + minutes;
 	}
+
 
 })

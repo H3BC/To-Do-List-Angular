@@ -1,36 +1,31 @@
-<!DOCtype HTML>
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
 		<title>To do list</title>
-		<style>
-			.done-true{
-				color: grey;
-				text-decoration: line-through;
-			}
-			span[contentEditable="true"]{
-				background-color: red;
-			}
-		</style>
+		<link rel="stylesheet" href="styles/myStyles.css">
 	</head>
 	<body ng-app="app">
 	<div ng-controller="mainController">
 		<center>
 			<h1>To Do List</h1>
 			<input type="text" ng-model="task" size="60"><br><br>
-			<input type="button" ng-click="addTask()" value="Add task">
+			<input type="button" ng-click="addTask()" value="Add task"> &nbsp
 			<input type="button" ng-show="taskList.length>0" ng-click="removeTask()" value="delate checked tasks">
 		</center>
 			<ol>
-				<li ng-repeat="fullList in taskList">
+				<li ng-repeat="fullList in taskList track by $index">
 				<input type="checkbox" ng-model="fullList.status">
 				<span ng-dblclick="editTask()" class="done-{{fullList.status}}" ng-model="fullList.taskContent" ng-keydown="closeEdit(fullList.taskContent)"> 
 				{{fullList.taskContent}} <br>
-				<textarea  cols="30" rows="3" ng-show="descView"></textarea> 
+				<div ng-show="descView">
+				Taks added: {{fullList.time}} <br>
+				<textarea contentEditable="false" ng-model="fullList.description" cols="30" rows="3"></textarea> 
+				</div>
 				</span>
 				</li>
 			</ol>
-			<input type="button" value="check descriptions" ng-init="descView = false" ng-show="taskList.length > 0" ng-click="descView = !descView">
+			<input type="button" value="check/edit descriptions" ng-init="descView = false" ng-show="taskList.length > 0" ng-click="descView = !descView">
 		
 
 	</div>
