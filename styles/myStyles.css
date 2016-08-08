@@ -1,7 +1,19 @@
 .done-true{
 				color: grey;
 				text-decoration: line-through;
+				font-style: italic;
 			}
 			span[contentEditable="true"]{
-				background-color: red;
+				background-color: grey;
+
 			}
+
+#list	{
+	font-size: 1.4rem;
+	width: 45%;
+	margin: auto;
+}
+
+.list-time{
+	font-size: 1rem;
+}

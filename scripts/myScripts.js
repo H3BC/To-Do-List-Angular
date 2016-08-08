@@ -16,8 +16,6 @@ angular.module('app',[])
 			$scope.taskList.push({'taskContent': $scope.task, 'status': 'false', 'description': '', 'time' : getCurrentDate() });
 			$scope.task = null;
 			localStorage['taskList'] = JSON.stringify($scope.taskList);
-			
-			
 		}
 		else{
 			return false;
@@ -30,12 +28,16 @@ angular.module('app',[])
 	}
 
 	$scope.closeEdit = function(space){
-		
+
 		if (event.keyCode == 13 && space != " "){
 			$scope.editTask();
 			
 		}
 		
+	}
+
+	$scope.saveDesc = function(){
+		localStorage['taskList'] = JSON.stringify($scope.taskList);
 	}
 
 	$scope.removeTask = function() {

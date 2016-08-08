@@ -13,19 +13,21 @@
 			<input type="button" ng-click="addTask()" value="Add task"> &nbsp
 			<input type="button" ng-show="taskList.length>0" ng-click="removeTask()" value="delate checked tasks">
 		</center>
+		<div id="list">
 			<ol>
 				<li ng-repeat="fullList in taskList track by $index">
 				<input type="checkbox" ng-model="fullList.status">
 				<span ng-dblclick="editTask()" class="done-{{fullList.status}}" ng-model="fullList.taskContent" ng-keydown="closeEdit(fullList.taskContent)"> 
 				{{fullList.taskContent}} <br>
 				<div ng-show="descView">
-				Taks added: {{fullList.time}} <br>
-				<textarea contentEditable="false" ng-model="fullList.description" cols="30" rows="3"></textarea> 
+				<span class="list-time">Taks added: {{fullList.time}}</span> <br>
+				<textarea contentEditable="false" ng-keydown="saveDesc()" ng-model="fullList.description" cols="30" rows="3"></textarea> 
 				</div>
 				</span>
 				</li>
 			</ol>
 			<input type="button" value="check/edit descriptions" ng-init="descView = false" ng-show="taskList.length > 0" ng-click="descView = !descView">
+		</div>
 		
 
 	</div>
