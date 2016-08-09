@@ -1,6 +1,6 @@
 angular.module('app',[])
 
-.controller('mainController', function($scope){
+.controller('mainController', function($scope,provideTime){
 	$scope.taskList = [];	
 
 	var listData = localStorage['taskList'];
@@ -13,7 +13,7 @@ angular.module('app',[])
 
 	$scope.addTask = function(){
 		if($scope.task != null){
-			$scope.taskList.push({'taskContent': $scope.task, 'status': 'false', 'description': '', 'time' : getCurrentDate() });
+			$scope.taskList.push({'taskContent': $scope.task, 'status': 'false', 'description': '', 'time' : provideTime.getCurrentDate() });
 			$scope.task = null;
 			localStorage['taskList'] = JSON.stringify($scope.taskList);
 		}
@@ -61,7 +61,12 @@ angular.module('app',[])
 		}
 	}
 
-	function getCurrentDate(){
+})
+
+
+.factory('provideTime', function(){
+	var obj = {};
+	obj.getCurrentDate = function(){
 		var curDate = new Date();
 		var year = curDate.getFullYear()
 		var month = curDate.getMonth();
@@ -116,6 +121,5 @@ angular.module('app',[])
 	
 		return year + ", " + day + " " + month + ", " + hours + ":" + minutes;
 	}
-
-
+	return obj;
 })
